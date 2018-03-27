@@ -27,19 +27,21 @@ Partial Class Form1
         Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.Mask_Name = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Start_Face = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.End_Face = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Add_Mask = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.Del_Mask = New System.Windows.Forms.DataGridViewButtonColumn()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.ExportScriptToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ExportScriptToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(648, 24)
@@ -73,13 +75,8 @@ Partial Class Form1
         Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.DataGridView1.Location = New System.Drawing.Point(0, 24)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.RowHeadersVisible = False
         Me.DataGridView1.Size = New System.Drawing.Size(648, 237)
         Me.DataGridView1.TabIndex = 1
-        '
-        'OpenFileDialog1
-        '
-        Me.OpenFileDialog1.FileName = "00CE.pac"
         '
         'Mask_Name
         '
@@ -106,6 +103,22 @@ Partial Class Form1
         '
         Me.Del_Mask.HeaderText = "Delete"
         Me.Del_Mask.Name = "Del_Mask"
+        '
+        'OpenFileDialog1
+        '
+        Me.OpenFileDialog1.FileName = "00CE.pac"
+        '
+        'ExportScriptToolStripMenuItem
+        '
+        Me.ExportScriptToolStripMenuItem.Name = "ExportScriptToolStripMenuItem"
+        Me.ExportScriptToolStripMenuItem.Size = New System.Drawing.Size(85, 20)
+        Me.ExportScriptToolStripMenuItem.Text = "Export Script"
+        Me.ExportScriptToolStripMenuItem.Visible = False
+        '
+        'SaveFileDialog1
+        '
+        Me.SaveFileDialog1.FileName = "3ds_select_script.txt"
+        Me.SaveFileDialog1.Filter = "Text File|*.txt|All files (*.*)|*.*"
         '
         'Form1
         '
@@ -137,4 +150,6 @@ Partial Class Form1
     Friend WithEvents End_Face As DataGridViewTextBoxColumn
     Friend WithEvents Add_Mask As DataGridViewButtonColumn
     Friend WithEvents Del_Mask As DataGridViewButtonColumn
+    Friend WithEvents ExportScriptToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents SaveFileDialog1 As SaveFileDialog
 End Class

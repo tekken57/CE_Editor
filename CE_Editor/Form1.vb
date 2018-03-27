@@ -1,5 +1,15 @@
 ﻿Imports System.IO    'Files
 Imports System.Text ' Text Encoding
+'Original File information gathered by Perfectplex: http://smacktalks.org/forums/topic/63726-masking-tool-help-required/
+'Object 1 : Torso	
+'Object 2 : Left Arm	
+'Object 3 : Right Arm	
+'Object 4 : Left Hand	
+'Object 5 : Right Hand	
+'Object 6 : Hips
+'Object 7 : Left Leg
+'Object 8 : Right Leg
+'Object 9 : Feet
 Public Class Form1
     Dim active_file As String = ""
     Dim mask_array As Byte()
@@ -21,6 +31,7 @@ Public Class Form1
         If OpenFileDialog1.ShowDialog = System.Windows.Forms.DialogResult.OK Then
             active_file = OpenFileDialog1.FileName
             If File.Exists(active_file) Then
+                ExportScriptToolStripMenuItem.Visible = True
                 open_mask(active_file)
             End If
         End If
@@ -296,6 +307,35 @@ Public Class Form1
             End If
             'MessageBox.Show(e.ColumnIndex & vbNewLine &  e.RowIndex)
             'TODO - Button Clicked - Execute Code Here
+        End If
+    End Sub
+
+    Private Sub ExportScriptToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportScriptToolStripMenuItem.Click
+        If DataGridView1.SelectedRows.Count = 0 Then
+            MessageBox.Show("Select row header to select rows.")
+        Else
+            If SaveFileDialog1.ShowDialog = DialogResult.OK Then
+
+
+                Dim FaceArray As List(Of Integer) = New List(Of Integer)
+                For Each temprow As DataGridViewRow In DataGridView1.SelectedRows
+                    For i As Integer = CInt(temprow.Cells(1).Value) To CInt(temprow.Cells(2).Value)
+                        FaceArray.Add(i)
+                    Next
+                Next
+                'sorts all the faces before putting it in the array
+                FaceArray.Sort()
+                '3ds max script provided by tekken
+                Using sw As New IO.StreamWriter(SaveFileDialog1.FileName)
+                    sw.WriteLine("for c in selection do")
+                    sw.WriteLine("(")
+                    sw.WriteLine("--c = convertToPoly($)")
+                    sw.WriteLine("--polyop.setFaceSelection c #(" & FaceArray.Count & ")")
+                    sw.WriteLine("setFaceSelection c #(" & String.Join(",", FaceArray) & ")")
+                    sw.WriteLine(")")
+                End Using
+                MessageBox.Show("File Saved")
+            End If
         End If
     End Sub
 End Class
