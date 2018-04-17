@@ -309,14 +309,59 @@ Public Class Form1
             'TODO - Button Clicked - Execute Code Here
         End If
     End Sub
-
     Private Sub ExportScriptToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportScriptToolStripMenuItem.Click
+        If DataGridView1.SelectedRows.Count = 0 Then
+            If SaveFileDialog1.ShowDialog = DialogResult.OK Then
+                Dim CurrentBody As String = "New"
+                Dim FaceArray As List(Of Integer) = New List(Of Integer)
+                Using sw As New IO.StreamWriter(SaveFileDialog1.FileName)
+                    For i As Integer = 0 To DataGridView1.RowCount - 1
+                        If DataGridView1.Rows(i).Cells(0).Value = "" Then 'Just some mask numbers
+                            For j As Integer = CInt(DataGridView1.Rows(i).Cells(1).Value) To CInt(DataGridView1.Rows(i).Cells(2).Value)
+                                FaceArray.Add(j + 1)
+                            Next
+                        Else 'New Body Part
+                            If CurrentBody <> "New" Then
+                                'We Have to Write the existing Mask to the File
+                                sw.WriteLine(CurrentBody)
+                                FaceArray.Sort()
+                                sw.WriteLine(String.Join(",", FaceArray))
+                            End If
+                            If Not DataGridView1.Rows(i).Cells(1).Value.ToString = "nil" Then
+                                FaceArray = New List(Of Integer)
+                                For j As Integer = CInt(DataGridView1.Rows(i).Cells(1).Value) To CInt(DataGridView1.Rows(i).Cells(2).Value)
+                                    FaceArray.Add(j + 1)
+                                Next
+                                CurrentBody = "Object" & (CInt(DataGridView1.Rows(i).Cells(0).Value.ToString().Substring(7, 1)) + 1).ToString
+                            End If
+                        End If
+                    Next
+                End Using
+                MessageBox.Show("File Saved")
+            End If
+        Else
+            If SaveFileDialog1.ShowDialog = DialogResult.OK Then
+                Dim FaceArray As List(Of Integer) = New List(Of Integer)
+                For Each temprow As DataGridViewRow In DataGridView1.SelectedRows
+                    For i As Integer = CInt(temprow.Cells(1).Value) To CInt(temprow.Cells(2).Value)
+                        FaceArray.Add(i + 1)
+                    Next
+                Next
+                'sorts all the faces before putting it in the array
+                FaceArray.Sort()
+                '3ds max script provided by tekken
+                Using sw As New IO.StreamWriter(SaveFileDialog1.FileName)
+                    sw.WriteLine(String.Join(",", FaceArray))
+                End Using
+                MessageBox.Show("File Saved")
+            End If
+        End If
+    End Sub
+    Private Sub OldExport(sender As Object, e As EventArgs)
         If DataGridView1.SelectedRows.Count = 0 Then
             MessageBox.Show("Select row header to select rows.")
         Else
             If SaveFileDialog1.ShowDialog = DialogResult.OK Then
-
-
                 Dim FaceArray As List(Of Integer) = New List(Of Integer)
                 For Each temprow As DataGridViewRow In DataGridView1.SelectedRows
                     For i As Integer = CInt(temprow.Cells(1).Value) To CInt(temprow.Cells(2).Value)
