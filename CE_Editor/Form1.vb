@@ -38,13 +38,26 @@ Public Class Form1
     End Sub
 
     Private Sub SaveToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SaveToolStripMenuItem.Click
-        If Not active_file = "" Then
+        Dim Saved_File = ""
+        If active_file.ToLower.Contains(".txt") Then
+            SaveCEFile.InitialDirectory = Path.GetDirectoryName(active_file)
+            If SaveCEFile.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+                Saved_File = SaveCEFile.FileName
+            End If
+        Else
+            Saved_File = active_file
+        End If
+
+        If Not Saved_File = "" Then
             For Each row As DataGridViewRow In DataGridView1.Rows
-                If row.Cells(2).Value = "nil" OrElse row.Cells(3).Value = "nil" Then
+                If row.Cells(1).Value.ToString = "nil" OrElse row.Cells(2).Value.ToString = "nil" Then
                     MessageBox.Show("Please delete any nil rows before saving")
                 End If
             Next
-            File.Copy(active_file, active_file & ".bak", True)
+            If Saved_File = active_file Then
+                File.Copy(active_file, active_file & ".bak", True)
+            End If
+
             Dim total_file As Byte() = New Byte() {}
             current_row = 1
             ' row 0 must be manually processed as the starting point
@@ -106,7 +119,7 @@ Public Class Form1
             total_file(&H8) = container_count
             'copying final containers to array before writing to file
             Buffer.BlockCopy(container_array, 0, total_file, &HC, container_array.Length - 1)
-            File.WriteAllBytes(active_file, total_file)
+            File.WriteAllBytes(Saved_File, total_file)
             MessageBox.Show("File Saved")
         Else
             MessageBox.Show("No Active File")
@@ -332,7 +345,11 @@ Public Class Form1
                                 For j As Integer = CInt(DataGridView1.Rows(i).Cells(1).Value) To CInt(DataGridView1.Rows(i).Cells(2).Value)
                                     FaceArray.Add(j + 1)
                                 Next
-                                CurrentBody = "Object" & (CInt(DataGridView1.Rows(i).Cells(0).Value.ToString().Substring(7, 1)) + 1).ToString
+                                If DataGridView1.Rows(i).Cells(0).Value.contains("Body") Then
+                                    CurrentBody = "Object" & (CInt(DataGridView1.Rows(i).Cells(0).Value.ToString().Substring(7, 1)) + 1).ToString
+                                Else
+                                    CurrentBody = "Object" & (CInt(DataGridView1.Rows(i).Cells(0).Value.ToString().Substring(7, 1))).ToString
+                                End If
                             End If
                         End If
                     Next
@@ -382,6 +399,56 @@ Public Class Form1
                 MessageBox.Show("File Saved")
             End If
         End If
+    End Sub
+
+    Private Sub ImportFacesToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportFacesToolStripMenuItem.Click
+        If OpenTxtFile.ShowDialog = System.Windows.Forms.DialogResult.OK Then
+            active_file = OpenTxtFile.FileName
+            If File.Exists(active_file) Then
+                ExportScriptToolStripMenuItem.Visible = True
+                open_faces(active_file)
+            End If
+        End If
+    End Sub
+    Private Sub open_faces(ByVal Source As String)
+        DataGridView1.Rows.Clear()
+        Dim New_Faces As String() = File.ReadAllLines(Source)
+        For i As Integer = 0 To New_Faces.Count - 1 Step 2
+            'MessageBox.Show(New_Faces(i))
+            Dim Temp_Name As String
+            Dim Temp_Object_Number As Integer = New_Faces(i).Substring(6, 1)
+            If Temp_Object_Number = 0 Then
+                Temp_Name = "M_Head_0_0"
+            Else
+                Temp_Name = "M_Body_" & Temp_Object_Number - 1 & "_0"
+            End If
+            Dim Face_Numbers As String() = New_Faces(i + 1).Split(",")
+            Dim Individual_Faces As List(Of Integer) = New List(Of Integer)
+            For Each temp_face_num As String In Face_Numbers
+                Individual_Faces.Add(Integer.Parse(temp_face_num))
+            Next
+            Individual_Faces.Sort()
+            Dim Name_Added As Boolean = False
+            Dim Base_Number As Integer = Individual_Faces(0) - 1
+            For J As Integer = 1 To Individual_Faces.Count - 2
+                If Not Individual_Faces(J) = Individual_Faces(J - 1) + 1 Then
+                    If Name_Added = False Then
+                        DataGridView1.Rows.Add(Temp_Name, Base_Number, Individual_Faces(J - 1) - 1)
+                        Base_Number = Individual_Faces(J) - 1
+                        Name_Added = True
+                    Else
+                        DataGridView1.Rows.Add("", Base_Number, Individual_Faces(J - 1) - 1)
+                        Base_Number = Individual_Faces(J) - 1
+                    End If
+                End If
+            Next
+            If Name_Added = False Then
+                DataGridView1.Rows.Add(Temp_Name, Base_Number, Individual_Faces(Individual_Faces.Count - 1) - 1)
+                Name_Added = True
+            Else
+                DataGridView1.Rows.Add("", Base_Number, Individual_Faces(Individual_Faces.Count - 1) - 1)
+            End If
+        Next
     End Sub
 End Class
 

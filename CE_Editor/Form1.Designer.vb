@@ -35,13 +35,17 @@ Partial Class Form1
         Me.Del_Mask = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ImportFacesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OpenTxtFile = New System.Windows.Forms.OpenFileDialog()
+        Me.SaveCEFile = New System.Windows.Forms.SaveFileDialog()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ExportScriptToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ExportScriptToolStripMenuItem, Me.ToolStripMenuItem1})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(648, 24)
@@ -50,7 +54,7 @@ Partial Class Form1
         '
         'FileToolStripMenuItem
         '
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenToolStripMenuItem, Me.SaveToolStripMenuItem})
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenToolStripMenuItem, Me.SaveToolStripMenuItem, Me.ImportFacesToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "File"
@@ -58,20 +62,20 @@ Partial Class Form1
         'OpenToolStripMenuItem
         '
         Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
-        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(103, 22)
+        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.OpenToolStripMenuItem.Text = "Open"
         '
         'SaveToolStripMenuItem
         '
         Me.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
-        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(103, 22)
+        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.SaveToolStripMenuItem.Text = "Save"
         '
         'ExportScriptToolStripMenuItem
         '
         Me.ExportScriptToolStripMenuItem.Name = "ExportScriptToolStripMenuItem"
-        Me.ExportScriptToolStripMenuItem.Size = New System.Drawing.Size(85, 20)
-        Me.ExportScriptToolStripMenuItem.Text = "Export Script"
+        Me.ExportScriptToolStripMenuItem.Size = New System.Drawing.Size(84, 20)
+        Me.ExportScriptToolStripMenuItem.Text = "Export Faces"
         Me.ExportScriptToolStripMenuItem.Visible = False
         '
         'DataGridView1
@@ -120,6 +124,28 @@ Partial Class Form1
         Me.SaveFileDialog1.FileName = "CE_mask_list.txt"
         Me.SaveFileDialog1.Filter = "Text File|*.txt|All files (*.*)|*.*"
         '
+        'ToolStripMenuItem1
+        '
+        Me.ToolStripMenuItem1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripMenuItem1.Image = Global.CE_Editor.My.Resources.Resources.thumb_Help_and_Support
+        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(28, 20)
+        '
+        'ImportFacesToolStripMenuItem
+        '
+        Me.ImportFacesToolStripMenuItem.Name = "ImportFacesToolStripMenuItem"
+        Me.ImportFacesToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ImportFacesToolStripMenuItem.Text = "Import Faces"
+        '
+        'OpenTxtFile
+        '
+        Me.OpenTxtFile.FileName = "CE_mask_list.txt"
+        Me.OpenTxtFile.Filter = "Text File|*.txt|All files (*.*)|*.*"
+        '
+        'SaveCEFile
+        '
+        Me.SaveCEFile.FileName = "00CE.pac"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -152,4 +178,8 @@ Partial Class Form1
     Friend WithEvents Del_Mask As DataGridViewButtonColumn
     Friend WithEvents ExportScriptToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents SaveFileDialog1 As SaveFileDialog
+    Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
+    Friend WithEvents ImportFacesToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents OpenTxtFile As OpenFileDialog
+    Friend WithEvents SaveCEFile As SaveFileDialog
 End Class
