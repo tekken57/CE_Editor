@@ -430,7 +430,7 @@ Public Class Form1
             Individual_Faces.Sort()
             Dim Name_Added As Boolean = False
             Dim Base_Number As Integer = Individual_Faces(0) - 1
-            For J As Integer = 1 To Individual_Faces.Count - 2
+            For J As Integer = 1 To Individual_Faces.Count - 1
                 If Not Individual_Faces(J) = Individual_Faces(J - 1) + 1 Then
                     If Name_Added = False Then
                         DataGridView1.Rows.Add(Temp_Name, Base_Number, Individual_Faces(J - 1) - 1)
@@ -449,6 +449,45 @@ Public Class Form1
                 DataGridView1.Rows.Add("", Base_Number, Individual_Faces(Individual_Faces.Count - 1) - 1)
             End If
         Next
+    End Sub
+    Private Sub TutorialVideoToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TutorialVideoToolStripMenuItem.Click
+        Try
+            Process.Start("https://www.youtube.com/watch?v=e7WNIh-WYB4")
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub DSImportScriptToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DSImportScriptToolStripMenuItem.Click
+        Try
+            Process.Start("http://velociterium.com/3FYJ")
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub DSSelectionScriptToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DSSelectionScriptToolStripMenuItem.Click
+        Try
+            Process.Start("http://velociterium.com/3FZt")
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub DSExportScriptToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DSExportScriptToolStripMenuItem.Click
+        Try
+            Process.Start("http://velociterium.com/3Fd2")
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub AznTutorialToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AznTutorialToolStripMenuItem.Click
+        Try
+            Process.Start("http://velociterium.com/4t4q")
+        Catch ex As Exception
+            MessageBox.Show(ex.Message)
+        End Try
     End Sub
 End Class
 

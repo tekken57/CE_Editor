@@ -26,7 +26,15 @@ Partial Class Form1
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SaveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ImportFacesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExportScriptToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TekkenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TutorialVideoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DSImportScriptToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DSSelectionScriptToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DSExportScriptToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AznTutorialToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Mask_Name = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Start_Face = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -35,10 +43,11 @@ Partial Class Form1
         Me.Del_Mask = New System.Windows.Forms.DataGridViewButtonColumn()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ImportFacesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.OpenTxtFile = New System.Windows.Forms.OpenFileDialog()
         Me.SaveCEFile = New System.Windows.Forms.SaveFileDialog()
+        Me.DSExportMasksToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DSDisplayMasksToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DSExportModelScriptToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -62,14 +71,20 @@ Partial Class Form1
         'OpenToolStripMenuItem
         '
         Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
-        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(142, 22)
         Me.OpenToolStripMenuItem.Text = "Open"
         '
         'SaveToolStripMenuItem
         '
         Me.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
-        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(142, 22)
         Me.SaveToolStripMenuItem.Text = "Save"
+        '
+        'ImportFacesToolStripMenuItem
+        '
+        Me.ImportFacesToolStripMenuItem.Name = "ImportFacesToolStripMenuItem"
+        Me.ImportFacesToolStripMenuItem.Size = New System.Drawing.Size(142, 22)
+        Me.ImportFacesToolStripMenuItem.Text = "Import Faces"
         '
         'ExportScriptToolStripMenuItem
         '
@@ -77,6 +92,51 @@ Partial Class Form1
         Me.ExportScriptToolStripMenuItem.Size = New System.Drawing.Size(84, 20)
         Me.ExportScriptToolStripMenuItem.Text = "Export Faces"
         Me.ExportScriptToolStripMenuItem.Visible = False
+        '
+        'ToolStripMenuItem1
+        '
+        Me.ToolStripMenuItem1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TekkenToolStripMenuItem, Me.AznTutorialToolStripMenuItem})
+        Me.ToolStripMenuItem1.Image = Global.CE_Editor.My.Resources.Resources.thumb_Help_and_Support
+        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(28, 20)
+        '
+        'TekkenToolStripMenuItem
+        '
+        Me.TekkenToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TutorialVideoToolStripMenuItem, Me.DSImportScriptToolStripMenuItem, Me.DSSelectionScriptToolStripMenuItem, Me.DSExportScriptToolStripMenuItem})
+        Me.TekkenToolStripMenuItem.Name = "TekkenToolStripMenuItem"
+        Me.TekkenToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.TekkenToolStripMenuItem.Text = "Tekken"
+        '
+        'TutorialVideoToolStripMenuItem
+        '
+        Me.TutorialVideoToolStripMenuItem.Name = "TutorialVideoToolStripMenuItem"
+        Me.TutorialVideoToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
+        Me.TutorialVideoToolStripMenuItem.Text = "Tutorial Video"
+        '
+        'DSImportScriptToolStripMenuItem
+        '
+        Me.DSImportScriptToolStripMenuItem.Name = "DSImportScriptToolStripMenuItem"
+        Me.DSImportScriptToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
+        Me.DSImportScriptToolStripMenuItem.Text = "3DS Import Script"
+        '
+        'DSSelectionScriptToolStripMenuItem
+        '
+        Me.DSSelectionScriptToolStripMenuItem.Name = "DSSelectionScriptToolStripMenuItem"
+        Me.DSSelectionScriptToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
+        Me.DSSelectionScriptToolStripMenuItem.Text = "3DS Selection Script"
+        '
+        'DSExportScriptToolStripMenuItem
+        '
+        Me.DSExportScriptToolStripMenuItem.Name = "DSExportScriptToolStripMenuItem"
+        Me.DSExportScriptToolStripMenuItem.Size = New System.Drawing.Size(178, 22)
+        Me.DSExportScriptToolStripMenuItem.Text = "3DS Export Script"
+        '
+        'AznTutorialToolStripMenuItem
+        '
+        Me.AznTutorialToolStripMenuItem.Name = "AznTutorialToolStripMenuItem"
+        Me.AznTutorialToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.AznTutorialToolStripMenuItem.Text = "Azn Tutorial"
         '
         'DataGridView1
         '
@@ -124,19 +184,6 @@ Partial Class Form1
         Me.SaveFileDialog1.FileName = "CE_mask_list.txt"
         Me.SaveFileDialog1.Filter = "Text File|*.txt|All files (*.*)|*.*"
         '
-        'ToolStripMenuItem1
-        '
-        Me.ToolStripMenuItem1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-        Me.ToolStripMenuItem1.Image = Global.CE_Editor.My.Resources.Resources.thumb_Help_and_Support
-        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(28, 20)
-        '
-        'ImportFacesToolStripMenuItem
-        '
-        Me.ImportFacesToolStripMenuItem.Name = "ImportFacesToolStripMenuItem"
-        Me.ImportFacesToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.ImportFacesToolStripMenuItem.Text = "Import Faces"
-        '
         'OpenTxtFile
         '
         Me.OpenTxtFile.FileName = "CE_mask_list.txt"
@@ -145,6 +192,24 @@ Partial Class Form1
         'SaveCEFile
         '
         Me.SaveCEFile.FileName = "00CE.pac"
+        '
+        'DSExportMasksToolStripMenuItem
+        '
+        Me.DSExportMasksToolStripMenuItem.Name = "DSExportMasksToolStripMenuItem"
+        Me.DSExportMasksToolStripMenuItem.Size = New System.Drawing.Size(166, 22)
+        Me.DSExportMasksToolStripMenuItem.Text = "3DS Export Masks"
+        '
+        'DSDisplayMasksToolStripMenuItem
+        '
+        Me.DSDisplayMasksToolStripMenuItem.Name = "DSDisplayMasksToolStripMenuItem"
+        Me.DSDisplayMasksToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.DSDisplayMasksToolStripMenuItem.Text = "3DS Display Masks"
+        '
+        'DSExportModelScriptToolStripMenuItem
+        '
+        Me.DSExportModelScriptToolStripMenuItem.Name = "DSExportModelScriptToolStripMenuItem"
+        Me.DSExportModelScriptToolStripMenuItem.Size = New System.Drawing.Size(200, 22)
+        Me.DSExportModelScriptToolStripMenuItem.Text = "3DS Export Model Script"
         '
         'Form1
         '
@@ -182,4 +247,13 @@ Partial Class Form1
     Friend WithEvents ImportFacesToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents OpenTxtFile As OpenFileDialog
     Friend WithEvents SaveCEFile As SaveFileDialog
+    Friend WithEvents TekkenToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents TutorialVideoToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DSImportScriptToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DSSelectionScriptToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DSExportScriptToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AznTutorialToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DSExportMasksToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DSDisplayMasksToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DSExportModelScriptToolStripMenuItem As ToolStripMenuItem
 End Class
